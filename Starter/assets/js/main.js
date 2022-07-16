@@ -29,9 +29,17 @@ const toggleMenu = () => {
 
 menuToggleIcon.addEventListener('click', toggleMenu);
 // Open/Close search form popup
+const formOpenBtn = selectElement('#search-icon');
+const formCloseBtn = selectElement('#form-close-btn');
+const searchFormContainer = selectElement('#search-form-container');
 
+formOpenBtn.addEventListener('click', () => searchFormContainer.classList.add('activated'));
+
+formCloseBtn.addEventListener('click', () => searchFormContainer.classList.remove('activated'));
 // -- Close the search form popup on ESC keypress
-
+window.addEventListener('keyup', event => {
+    if(event.key === 'Escape') searchFormContainer.classList.remove('activated');
+});
 // Switch theme/add to local storage
 const bodyElement = document.body;
 const themeToggleBtn = selectElement('#theme-toggle-btn');
@@ -51,3 +59,22 @@ themeToggleBtn.addEventListener('click', () => {
     }
 });
 // Swiper
+const swiper = new Swiper('.swiper',{
+    slidesPerView: 1,
+    spaceBetween: 20,
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+    },
+    pagination: {
+        el: '.swiper-pagination'
+    },
+    breakpoints: {
+        700: {
+            slidesPerView: 2
+        },
+        1200: {
+            slidesPerView: 3
+        }
+    }
+});
